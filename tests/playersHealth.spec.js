@@ -18,4 +18,3 @@ test("Login to Portal and save new client", async ({ page }) => {
   await addClientPage.addClient(clientName);
   await addClientPage.searchAndClickViewButton(clientName);
 });
-

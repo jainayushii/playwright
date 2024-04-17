@@ -19,7 +19,7 @@ class AddClientPage {
     await this.page.fill(this.searchInput, clientName);
     await this.page.press(this.searchInput, "Enter");
     await this.page.waitForSelector(this.clientTable);
-    await this.page.click(this.viewButton);
+    await this.page.click(this.viewButton, {force:true},{ timeout: 5000 });
   }
 }
 
