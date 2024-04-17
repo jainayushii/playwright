@@ -10,23 +10,12 @@ test.beforeEach(async ({ page }) => {
   await loginPage.login(loginInfo.username, loginInfo.password);
 });
 
-test('Login to Portal and Search for "Tim Cook & Sons"', async ({ page }) => {
-  const homePage = new HomePage(page);
-  await homePage.verifyLogin();
-  await homePage.searchForClient("Tim Cook & Sons");
-});
-
 test("Login to Portal and save new client", async ({ page }) => {
   const addClientPage = new AddClientPage(page);
-  const randomClientName = generateRandomName();
-  await addClientPage.addClient(randomClientName);
+  const clientName = "Client_" + Math.floor(Math.random() * 1000);
+  const homePage = new HomePage(page);
+  await homePage.verifyLogin();
+  await addClientPage.addClient(clientName);
+  await addClientPage.searchAndClickViewButton(clientName);
 });
 
-function generateRandomName() {
-  const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let randomName = "";
-  for (let i = 0; i < 8; i++) {
-    randomName += letters.charAt(Math.floor(Math.random() * letters.length));
-  }
-  return randomName;
-}
